@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.simplediscgolf.MainActivity"
+>
+
+    <TextView
+        android:id="@+id/tw_title"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="@string/app_name"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:background="@color/primary"
+        android:textColor="@color/icons"
+    />
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_below="@id/tw_title"
+        android:id="@+id/set_game_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.android.miwok.NumberActivity"
+        android:divider="@color/divider"
+        android:dividerHeight="1px"
+        style="@style/SetGameStyle"/>
+
+
+</RelativeLayout>
