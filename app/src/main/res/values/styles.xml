@@ -11,24 +11,38 @@
     </style>
 
     <style name="SetGameStyle">
-
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/list_item_height</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:divider">@color/divider</item>
+        <item name="android:dividerHeight">1px</item>
     </style>
 
-    <style name="SetGameStylePrimary">
+    <style name="SetGameStylePrimary" parent="SetGameStyle">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_item_height</item>
     </style>
 
-    <style name="SetGameStyleSecondary">
+    <style name="SetGameStyleSecondary" parent="SetGameStyle">
         <item name="android:textColor">@color/secondary_text</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_item_height</item>
     </style>
 
     <style name="SetGameStyleIcon">
         <item name="android:padding">16dp</item>
     </style>
+
+    <style name="Player">
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="PlayerIcon">
+        <item name="android:padding">8dp</item>
+        <item name="android:tint">@color/secondary_text</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
 </resources>

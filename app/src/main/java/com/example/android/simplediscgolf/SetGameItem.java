@@ -25,6 +25,7 @@ public class SetGameItem {
     public SetGameItem(String primaryString, String secondaryString) {
         mPrimaryString = primaryString;
         mSecondaryString = secondaryString;
+        mIcon = 0;
         mActivity = null;
     }
 

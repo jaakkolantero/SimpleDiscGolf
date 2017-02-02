@@ -1,6 +1,7 @@
 package com.example.android.simplediscgolf;
 
 import android.content.Intent;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,13 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<SetGameItem> setGameArray = new ArrayList<SetGameItem>();
 
-
-
         //Populate SetGameList
         //TODO Strings to strings.xml
         setGameArray.add(new SetGameItem("Players","No Players",
                 R.drawable.ic_accessibility_black_48dp,
-                //TODO get packagename in front of class
+                //TODO get packagename in front of class for cleaner look
                 "com.example.android.simplediscgolf.PlayersActivity"));
         setGameArray.add(new SetGameItem("Course","No Course",R.drawable.ic_location_city_black_48dp));
 
