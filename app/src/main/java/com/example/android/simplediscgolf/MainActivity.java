@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_accessibility_black_48dp,
                 //TODO get packagename in front of class for cleaner look
                 "com.example.android.simplediscgolf.PlayersActivity"));
-        setGameArray.add(new SetGameItem("Course","No Course",R.drawable.ic_location_city_black_48dp));
+        setGameArray.add(new SetGameItem("Course","No Course",
+                R.drawable.ic_location_city_black_48dp,
+                "com.example.android.simplediscgolf.CoursesActivity"));
 
         SetGameAdapter setGameAdapter = new SetGameAdapter(this,setGameArray);
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                SetGameItem item = (SetGameItem)parent.getItemAtPosition(position);
+                final SetGameItem item = (SetGameItem)parent.getItemAtPosition(position);
 
                 if (item.getActivity() != null) {
                     try {
