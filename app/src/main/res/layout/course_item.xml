@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:tools="http://schemas.android.com/tools"
+style="@style/Player">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tw_course_list_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_course_item_name"
+        tools:text="Course N:o"
+        style="@style/SetGameStylePrimary"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_course_item_secondary"
+        tools:text="This is secondary text"
+        style="@style/SetGameStyleSecondary"/>
+</LinearLayout>
+
+<View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@color/icons"
+        android:id="@+id/iw_course_item_edit"
+        style="@style/PlayerIcon"
+        android:layout_gravity="right"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@color/icons"
+        android:id="@+id/iw_course_item_delete"
+        style="@style/PlayerIcon"
+        android:layout_gravity="right"/>
+</LinearLayout>
+
 </LinearLayout>

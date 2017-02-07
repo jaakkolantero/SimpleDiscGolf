@@ -21,11 +21,17 @@ android {
 
 }
 
+repositories {
+    mavenCentral()
+}
+
 ext {
     supportLibVersion = '25.0.0'  // variable that can be referenced to keep support libs consistent
 }
 
 dependencies {
+
+    compile 'com.google.code.gson:gson:2.8.0'
 
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"

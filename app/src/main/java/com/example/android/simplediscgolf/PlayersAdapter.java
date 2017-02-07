@@ -2,6 +2,7 @@ package com.example.android.simplediscgolf;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -24,10 +25,11 @@ import java.util.ArrayList;
  */
 
 public class PlayersAdapter extends ArrayAdapter<PlayerItem> {
-    public PlayersAdapter(Context context, ArrayList<PlayerItem> translations) {
-        super(context, 0, translations);
+
+    public PlayersAdapter(Context context, ArrayList<PlayerItem> itemList) {
+        super(context, 0, itemList);
         this.mContext = context;
-        this.mPlayerList = translations;
+        this.mPlayerList = itemList;
     }
 
     private int mEditIcon;
@@ -39,9 +41,9 @@ public class PlayersAdapter extends ArrayAdapter<PlayerItem> {
     private ArrayList<PlayerItem> mPlayerList = new ArrayList<PlayerItem>();
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position,View convertView, ViewGroup parent) {
         // Get the data item for this position
-        PlayerItem playerItem = getItem(position);
+        final PlayerItem playerItem = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -57,6 +59,12 @@ public class PlayersAdapter extends ArrayAdapter<PlayerItem> {
         tvMail.setText(playerItem.getMail());
         ibEdit.setImageResource(mEditIcon);
         ibDelete.setImageResource(mDeleteIcon);
+
+        if (playerItem.getSelected()) {
+            convertView.findViewById(R.id.ll_player_item).setBackgroundColor(Color.CYAN);
+        } else {
+            convertView.findViewById(R.id.ll_player_item).setBackgroundColor(Color.TRANSPARENT);
+        }
 
         ibEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +84,7 @@ public class PlayersAdapter extends ArrayAdapter<PlayerItem> {
         });
 
 
-
+        notifyDataSetChanged();
         // Return the completed view to render on screen
         return convertView;
     }

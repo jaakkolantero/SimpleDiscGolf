@@ -1,13 +1,18 @@
 package com.example.android.simplediscgolf;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -19,7 +24,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class PlayersActivity extends AppCompatActivity {
 
@@ -28,7 +39,10 @@ public class PlayersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
+
         final ArrayList<PlayerItem> playersArray = new ArrayList<PlayerItem>();
+
+
 
         //Populate SetGameList
         //TODO Strings to strings.xml
@@ -54,9 +68,34 @@ public class PlayersActivity extends AppCompatActivity {
         playersArray.add(new PlayerItem("Player19", "player@mail.com"));
         playersArray.add(new PlayerItem("Player20", "player@mail.com"));
 
+//TESTING
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor;
+        editor = sharedPreferences.edit();
+
+        Gson gson = new Gson();
+
+        String playerItemJson = gson.toJson(playersArray);
+        Log.i("PlayerItemJson", "JSON: " + playerItemJson);
+
+        editor.putString("players",playerItemJson);
+        editor.apply();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String fromShared = preferences.getString("players", "");
+        ArrayList<PlayerItem> testArray = null;
+        if(!fromShared.equalsIgnoreCase(""))
+        {
+            testArray = (ArrayList<PlayerItem>) gson.fromJson(fromShared,new TypeToken<ArrayList<PlayerItem>>(){}.getType());
+        }
 
 
-        PlayersAdapter playersAdapter = new PlayersAdapter(this, playersArray);
+        Log.i("PlayerItemJson", "Back to object: " + testArray.get(0).getPlayer());
+
+
+///TESTING
+
+        final PlayersAdapter playersAdapter = new PlayersAdapter(this, playersArray);
 
         playersAdapter.setEditIcon(R.drawable.ic_mode_edit_black_18dp);
         playersAdapter.setDeleteIcon(R.drawable.ic_clear_black_18dp);
@@ -66,9 +105,11 @@ public class PlayersActivity extends AppCompatActivity {
         playersList.setAdapter(playersAdapter);
         playersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(final AdapterView<?> parent, View view, int position, long id) {
-
-                final PlayerItem item = (PlayerItem) parent.getItemAtPosition(position);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PlayerItem item = (PlayerItem) parent.getItemAtPosition(position);
+                item.setSelected(!item.getSelected());
+                Log.i("ITEM SELECTED ", "onItemClick: " + position + " selected: " + item.getSelected());
+                playersAdapter.notifyDataSetChanged();
             }
         });
 

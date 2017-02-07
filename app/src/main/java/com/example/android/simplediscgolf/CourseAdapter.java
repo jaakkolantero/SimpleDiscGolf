@@ -1,26 +1,39 @@
 package com.example.android.simplediscgolf;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * Created by ufox on 2.2.2017.
  */
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseViewHolder> {
+
+    public CourseAdapter(ArrayList<CourseItem> courseItemArrayList) {
+        mCourseItemArrayList = courseItemArrayList;
+        mNumberOfItems = mCourseItemArrayList.size();
+    }
 
     private static final String TAG = CourseAdapter.class.getSimpleName();
 
     private int mNumberOfItems;
 
-    public CourseAdapter(int itemCount) {
-        mNumberOfItems = itemCount;
-    }
+    private int mEditIcon;
+    private int mDeleteIcon;
+
+    private ArrayList<CourseItem> mCourseItemArrayList;
+
 
     @Override
     public CourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,6 +45,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         View view = inflater.inflate(layout,parent,attachToParentImmediately);
         CourseViewHolder courseViewHolder = new CourseViewHolder(view);
+        courseViewHolder.setEditIcon(mEditIcon);
+        courseViewHolder.setDeleteIcon(mDeleteIcon);
 
         return courseViewHolder;
     }
@@ -39,7 +54,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(CourseViewHolder holder, int position) {
         Log.d(TAG, "#: " + position);
-        holder.bind(position);
+        holder.bind(position, mCourseItemArrayList.get(position));
     }
 
     @Override
@@ -47,19 +62,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return mNumberOfItems;
     }
 
-    class CourseViewHolder extends RecyclerView.ViewHolder {
-
-        protected TextView listItemTextView;
-
-        public CourseViewHolder(View itemView) {
-            super(itemView);
-
-            listItemTextView = (TextView) itemView.findViewById(R.id.tw_course_list_name);
-        }
-
-        void bind(int listIndex) {
-            listItemTextView.setText(String.valueOf(listIndex));
-        }
-
+    public void setEditIcon(int resId) {
+        mEditIcon = resId;
     }
+
+    public void setDeleteIcon(int resId) {
+        mDeleteIcon = resId;
+    }
+
 }

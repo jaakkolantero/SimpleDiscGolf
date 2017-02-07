@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_accessibility_black_48dp,
                 //TODO get packagename in front of class for cleaner look
                 "com.example.android.simplediscgolf.PlayersActivity"));
+
         setGameArray.add(new SetGameItem("Course","No Course",
                 R.drawable.ic_location_city_black_48dp,
                 "com.example.android.simplediscgolf.CoursesActivity"));
