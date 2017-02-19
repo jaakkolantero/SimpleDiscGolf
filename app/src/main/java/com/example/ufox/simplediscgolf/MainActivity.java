@@ -1,10 +1,15 @@
 package com.example.ufox.simplediscgolf;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements
@@ -18,12 +23,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
+
         //Create Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_sections);
         AppSectionsPagerAdapter appSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(appSectionsPagerAdapter);
 
-        //Add Tab Titles
+        //Add Tab Titles, title strings @AppSectionsPagerAdapter.tabTitles
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_main_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -32,6 +38,29 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    //Create actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.appbar,menu);
+        return true;
+    }
+
+    //actionbar action handling
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
 
     }
 }

@@ -8,9 +8,14 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by ufox on 18.2.2017.
  */
 
+
+//https://guides.codepath.com/android/google-play-style-tabs-using-tablayout
+
 public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
-    final int PAGE_COUNT = 3;
+    //Number of tabs
+    final static int PAGE_COUNT = 3;
+    //Tab Titles
     private String tabTitles[] = new String[] { "Start", "Players", "Courses" };
 
     public AppSectionsPagerAdapter(FragmentManager fragmentManager) {
