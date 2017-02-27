@@ -17,14 +17,12 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName="com.example.ufox.simplediscgolf.MainActivity">
-            <!-- Parent activity meta-data to support 4.0 and lower -->
+            android:parentActivityName=".MainActivity">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.ufox.simplediscgolf.MainActivity" />
+                android:name="parent.support.PARENT_ACTIVITY"
+                android:value="com.example.ufox.simplediscgolf.MainActivity"
+            />
         </activity>
-
 
     </application>
 

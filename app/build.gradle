@@ -27,6 +27,7 @@ ext {
 dependencies {
 
 
+
     compile 'com.google.code.gson:gson:2.8.0'
 
     compile "com.android.support:support-v4:${supportLibVersion}"

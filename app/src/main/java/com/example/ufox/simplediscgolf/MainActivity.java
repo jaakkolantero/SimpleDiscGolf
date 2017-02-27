@@ -2,11 +2,11 @@ package com.example.ufox.simplediscgolf;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +19,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Set default setting preferences on first run
+        PreferenceManager.setDefaultValues(this, R.xml.pref_settings, false);
+        //Set correct theme
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_theme", false)) {
+            setTheme(R.style.AppTheme_Dark);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
