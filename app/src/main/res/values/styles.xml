@@ -2,7 +2,7 @@
 
     <!--http://www.hidroh.com/2015/02/25/support-multiple-themes-android-app-part-2/-->
 
-    <!-- Base application theme. -->
+    <!-- DARK base theme -->
     <style name="AppTheme.Dark" parent="@style/Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -17,6 +17,7 @@
         <item name="appbarMenuIconColor">@color/appbarIconColorLight</item>
     </style>
 
+    <!-- LIGHT base theme -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -24,6 +25,15 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="appbarMenuIconColor">@color/appbarIconColorDark</item>
+    </style>
+
+    <!-- OUTLINE fragment styles -->
+    <style name="OutlineCardViewPrimaryText">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="OutlineCardViewSecondaryText">
+        <item name="android:textSize">12sp</item>
     </style>
 
 </resources>
