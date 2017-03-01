@@ -3,7 +3,7 @@
     <!--http://www.hidroh.com/2015/02/25/support-multiple-themes-android-app-part-2/-->
 
     <!-- DARK base theme -->
-    <style name="AppTheme.Dark" parent="@style/Theme.AppCompat">
+    <style name="AppTheme.Dark" parent="@style/Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -18,13 +18,18 @@
     </style>
 
     <!-- LIGHT base theme -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="appbarMenuIconColor">@color/appbarIconColorDark</item>
+    </style>
+
+    <!-- APPBAR style -->
+    <style name="AppToolBar">
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
     <!-- OUTLINE fragment styles -->

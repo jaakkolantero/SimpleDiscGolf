@@ -8,15 +8,15 @@
     tools:context="com.example.ufox.simplediscgolf.MainActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_toolbar"
+        android:id="@+id/tb_main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"/>
+        style="@style/AppToolBar"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_sections"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tl_main_tabs"

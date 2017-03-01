@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,13 +41,14 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             return;
         }
 
+
+        //Send broadcast so other activites know to recreate
+        Intent broadCastIntent = new Intent("theme-change");
+        broadCastIntent.putExtra("data","theme change");
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(broadCastIntent);
+
         //Recreate activity to redraw new theme
-        //Close current activity
-        getActivity().finish();
-        //Create new activity
-        final Intent intent = getActivity().getIntent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getActivity().startActivity(intent);
+        getActivity().recreate();
         //No animation
         getActivity().overridePendingTransition(0, 0);
 

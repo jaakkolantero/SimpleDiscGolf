@@ -2,14 +2,15 @@
     <string name="app_name">SimpleDiscGolf</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="start_here">Start Here!</string>
     <string name="select_players">Select players</string>
     <string name="select_course">Select course</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Outline fragment strings -->
     <string name="outline_players">Players</string>
+    <string name="outline_no_players">No players selected</string>
     <string name="outline_course">Course</string>
+    <string name="outline_no_course">No course selected</string>
 
     <!-- Appbar Strings -->
     <string name="appbar_settings">Settings</string>
