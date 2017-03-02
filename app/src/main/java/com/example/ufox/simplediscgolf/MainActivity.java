@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
         implements
         PlayerFragment.OnFragmentInteractionListener,
         CourseFragment.OnFragmentInteractionListener,
-        OutlineFragment.OnFragmentInteractionListener {
+        StartFragment.OnFragmentInteractionListener {
 
     private final static String TAG = "MainActivity";
 

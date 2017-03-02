@@ -18,6 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        //TODO Create up button to toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_settings_toolbar);
         setSupportActionBar(toolbar);
 
