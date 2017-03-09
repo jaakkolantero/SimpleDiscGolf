@@ -14,15 +14,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_player_item_name"
+            android:id="@+id/tv_course_item_name"
             tools:text=""
             style="@style/listItemPrimaryText"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_player_item_mail"
-            tools:text=""
-            style="@style/listItemSecondaryText"/>
     </LinearLayout>
 
     <View
