@@ -6,13 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.ufox.simplediscgolf.PlayerFragment">
 
-
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_player"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/select_players" />
+        android:layout_height="wrap_content"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

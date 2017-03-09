@@ -41,4 +41,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <!-- LISTITEM styles -->
+    <style name="listItem">
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="listItemPrimaryText">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="listItemSecondaryText">
+    </style>
+
+
 </resources>

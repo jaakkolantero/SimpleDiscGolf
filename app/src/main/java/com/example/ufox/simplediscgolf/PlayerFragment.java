@@ -4,9 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,6 +23,14 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class PlayerFragment extends Fragment {
+
+
+
+    protected RecyclerView mPlayerRecyclerView;
+    protected PlayerAdapter mPlayerAdapter;
+    protected ArrayList<PlayerObject> mPlayerObjectArrayList;
+
+    private static final String TAG = "PlayerRecyclerViewFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,13 +71,30 @@ public class PlayerFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        //Populate List with dummy data
+        initDataSet();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_player,container,false);
+        rootView.setTag(TAG);
+
+        mPlayerRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_player);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mPlayerRecyclerView.setLayoutManager(layoutManager);
+        mPlayerRecyclerView.setHasFixedSize(true);
+
+        mPlayerAdapter = new PlayerAdapter(mPlayerObjectArrayList);
+
+        mPlayerRecyclerView.setAdapter(mPlayerAdapter);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_player, container, false);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,5 +134,15 @@ public class PlayerFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    void initDataSet() {
+        mPlayerObjectArrayList = new ArrayList<PlayerObject>();
+        mPlayerObjectArrayList.add(new PlayerObject("Tero", "tero.jaakkola1@gmail.com"));
+        mPlayerObjectArrayList.add(new PlayerObject("Player1", "player@mail.com"));
+        mPlayerObjectArrayList.add(new PlayerObject("Player2", "player@mail.com"));
+        mPlayerObjectArrayList.add(new PlayerObject("Player3", "player@mail.com"));
+        mPlayerObjectArrayList.add(new PlayerObject("Player4", "player@mail.com"));
     }
 }
