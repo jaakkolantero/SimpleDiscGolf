@@ -2,8 +2,8 @@
 
     <!--http://www.hidroh.com/2015/02/25/support-multiple-themes-android-app-part-2/-->
 
-    <!-- Base application theme. -->
-    <style name="AppTheme.Dark" parent="@style/Theme.AppCompat">
+    <!-- DARK base theme -->
+    <style name="AppTheme.Dark" parent="@style/Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -17,7 +17,8 @@
         <item name="appbarMenuIconColor">@color/appbarIconColorLight</item>
     </style>
 
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+    <!-- LIGHT base theme -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -25,5 +26,30 @@
 
         <item name="appbarMenuIconColor">@color/appbarIconColorDark</item>
     </style>
+
+    <!-- APPBAR style -->
+    <style name="AppToolBar">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <!-- OUTLINE fragment styles -->
+    <style name="OutlineCardViewPrimaryText">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="OutlineCardViewSecondaryText">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- LISTITEM styles -->
+    <style name="listItem">
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="listItemPrimaryText">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="listItemSecondaryText">
+    </style>
+
 
 </resources>

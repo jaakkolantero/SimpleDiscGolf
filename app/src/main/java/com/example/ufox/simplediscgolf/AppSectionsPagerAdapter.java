@@ -27,13 +27,13 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return OutlineFragment.newInstance("Main","param2");
+                return StartFragment.newInstance("Main","param2");
             case 1:
                 return PlayerFragment.newInstance("Main","param2");
             case 2:
                 return CourseFragment.newInstance("Main","param2");
             default:
-                return OutlineFragment.newInstance("Main","param2");
+                return StartFragment.newInstance("Main","param2");
         }
     }
 
