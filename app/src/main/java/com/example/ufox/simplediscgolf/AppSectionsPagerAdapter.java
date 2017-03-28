@@ -3,6 +3,8 @@ package com.example.ufox.simplediscgolf;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+import android.view.ViewGroup;
 
 /**
  * Created by ufox on 18.2.2017.
@@ -13,10 +15,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
+    //TAG
+    private final static String TAG ="AppSectionsAdapter";
     //Number of tabs
     final static int PAGE_COUNT = 3;
     //Tab Titles
     private String tabTitles[] = new String[] { "Start", "Players", "Courses" };
+
+    private PlayerFragment mPlayerFragment;
+    private StartFragment mStartFragment;
+    private CourseFragment mCourseFragment;
+
 
     public AppSectionsPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -27,13 +36,13 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return StartFragment.newInstance("Main","param2");
+                return mStartFragment.newInstance();
             case 1:
-                return PlayerFragment.newInstance("Main","param2");
+                return mPlayerFragment.newInstance();
             case 2:
-                return CourseFragment.newInstance("Main","param2");
+                return mCourseFragment.newInstance();
             default:
-                return StartFragment.newInstance("Main","param2");
+                return mStartFragment.newInstance();
         }
     }
 
@@ -45,5 +54,28 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+        switch (position) {
+            case 0:
+                mStartFragment = (StartFragment) createdFragment;
+                break;
+            case 1:
+                mPlayerFragment = (PlayerFragment) createdFragment;
+                break;
+            case 2:
+                mCourseFragment = (CourseFragment) createdFragment;
+                break;
+        }
+        return createdFragment;
+    }
+
+    void updatePlayer (PlayerObject player) {
+        if (mPlayerFragment != null) {
+            mPlayerFragment.updatePlayer(player);
+        }
     }
 }

@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,11 +20,13 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements
-        PlayerFragment.OnFragmentInteractionListener,
         CourseFragment.OnFragmentInteractionListener,
-        StartFragment.OnFragmentInteractionListener {
+        StartFragment.OnFragmentInteractionListener,
+        PlayerAddDialogFragment.AddNewPlayerListener{
 
     private final static String TAG = "MainActivity";
+
+    AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
     //Local broadcast for theme change information
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -58,10 +61,15 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_main_toolbar);
         setSupportActionBar(toolbar);
 
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
         //Create Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_sections);
-        AppSectionsPagerAdapter appSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(appSectionsPagerAdapter);
+        mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(mAppSectionsPagerAdapter);
 
         //Add Tab Titles, title strings @AppSectionsPagerAdapter.tabTitles
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_main_tabs);
@@ -75,12 +83,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //Create actionbar
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.appbar,menu);
-        return true;
+    public void addNewPlayer(PlayerObject player) {
+        mAppSectionsPagerAdapter.updatePlayer(player);
     }
 
     //actionbar action handling

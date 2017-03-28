@@ -20,10 +20,8 @@
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="parent.support.PARENT_ACTIVITY"
-                android:value="com.example.ufox.simplediscgolf.MainActivity"
-            />
+                android:value="com.example.ufox.simplediscgolf.MainActivity" />
         </activity>
-
     </application>
 
 </manifest>
