@@ -78,4 +78,10 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
             mPlayerFragment.updatePlayer(player);
         }
     }
+
+    void selectedPlayersChanged(PlayerObject newPlayer) {
+        if (mStartFragment != null) {
+            mStartFragment.selectedPlayersChanged(newPlayer);
+        }
+    }
 }

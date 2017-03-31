@@ -25,6 +25,7 @@
     <string name="add_player_check_mail">Please check your email address</string>
     <string name="add_player_check_name">Please give a name</string>
     <string name="add_player_name">Name</string>
+    <string name="add_player_name_max_length"> (1-10 letters)</string>
     <string name="add_player_mail">Mail</string>
     <string name="add_player_dialog_title">Add Player</string>
     <string name="add">Add</string>

@@ -51,4 +51,15 @@
     <style name="listItemSecondaryText">
     </style>
 
+    <!--ADD PLAYER DIALOG styles -->
+    <style name="addPlayerDialogSecondaryText">
+        <item name="android:textSize">10sp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+    <style name="addPlayerDialogNameEditText">
+        <!--workaround to make maxlength function properly-->
+        <item name="android:inputType">textNoSuggestions|textVisiblePassword</item>
+        <item name="android:maxLength">10</item>
+    </style>
+
 </resources>

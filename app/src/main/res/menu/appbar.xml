@@ -4,9 +4,9 @@
 
     <!-- REFERENCE https://developer.android.com/training/appbar/actions.html -->
 
-    <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
         android:title="@string/appbar_settings"
         android:icon="@drawable/ic_settings_tinted_24dp"
-        app:showAsAction="ifRoom|collapseActionView"/>
+        app:showAsAction="ifRoom|collapseActionView"
+        />
 </menu>

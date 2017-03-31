@@ -35,7 +35,6 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "PlayerFragment";
 
-
     public PlayerFragment() {
         // Required empty public constructor
     }
@@ -45,7 +44,6 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
      * this fragment using the provided parameters.
      * @return A new instance of fragment PlayerFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static PlayerFragment newInstance() {
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
@@ -58,7 +56,6 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         //Populate List with dummy data
         initDataSet();
-
     }
 
     @Override
@@ -112,8 +109,8 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
         mPlayerObjectArrayList.add(new PlayerObject("Player4", "player@mail.com"));
     }
 
+    //Data from playeradddialogfragment through mainactivity
     void updatePlayer (PlayerObject player) {
-        Log.d(TAG, "updatePlayer: " + player.getPlayer());
         mPlayerObjectArrayList.add(player);
     }
 }

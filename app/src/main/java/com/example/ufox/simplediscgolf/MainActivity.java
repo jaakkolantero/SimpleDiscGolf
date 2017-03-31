@@ -9,26 +9,27 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements
         CourseFragment.OnFragmentInteractionListener,
         StartFragment.OnFragmentInteractionListener,
-        PlayerAddDialogFragment.AddNewPlayerListener{
+        PlayerAddDialogFragment.AddNewPlayerListener,
+        PlayerViewHolder.SelectedPlayersListener{
 
     private final static String TAG = "MainActivity";
 
-    AppSectionsPagerAdapter mAppSectionsPagerAdapter;
+    private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 
-    //Local broadcast for theme change information
+    //Local broadcast for theme change refresh
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -59,12 +60,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_main_toolbar);
+        toolbar.inflateMenu(R.menu.appbar);
         setSupportActionBar(toolbar);
-
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
 
         //Create Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_sections);
@@ -74,6 +71,8 @@ public class MainActivity extends AppCompatActivity
         //Add Tab Titles, title strings @AppSectionsPagerAdapter.tabTitles
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_main_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+
 
 
     }
@@ -88,7 +87,19 @@ public class MainActivity extends AppCompatActivity
         mAppSectionsPagerAdapter.updatePlayer(player);
     }
 
-    //actionbar action handling
+    @Override
+    public void selectedPlayersChanged(PlayerObject newPlayer) {
+        mAppSectionsPagerAdapter.selectedPlayersChanged(newPlayer);
+    }
+
+    //Inflate Appbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar,menu);
+        return true;
+    }
+
+    //appbar action handling
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

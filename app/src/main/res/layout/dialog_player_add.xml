@@ -8,16 +8,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-                <TextView
-                    android:id="@+id/dialog_name"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_player_name"
-                    />
+                    android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/dialog_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_player_name"
+                            />
+                        <TextView
+                            android:id="@+id/dialog_name_secondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_player_name_max_length"
+                            style="@style/addPlayerDialogSecondaryText"
+                            />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/dialog_edit_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    style="@style/addPlayerDialogNameEditText"/>
                 <TextView
                     android:id="@+id/dialog_mail"
                     android:layout_width="wrap_content"
@@ -25,7 +38,7 @@
                     android:text="@string/add_player_mail"/>
                 <EditText
                     android:id="@+id/dialog_edit_mail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"/>
         </LinearLayout>
 </RelativeLayout>
