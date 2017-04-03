@@ -51,7 +51,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
 
         holder.bind(mContext, position,mPlayerArrayList.get(position));
 
-        Log.d(TAG, "onBindViewHolder: " + mPlayerArrayList.get(position).getSelected());
     }
 
     @Override

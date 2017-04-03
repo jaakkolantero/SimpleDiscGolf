@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity
         CourseFragment.OnFragmentInteractionListener,
         StartFragment.OnFragmentInteractionListener,
         PlayerAddDialogFragment.AddNewPlayerListener,
-        PlayerViewHolder.SelectedPlayersListener{
+        PlayerViewHolder.SelectedPlayersListener,
+        PlayerViewHolder.DeletePlayerListener{
 
     private final static String TAG = "MainActivity";
 
@@ -90,6 +91,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void selectedPlayersChanged(PlayerObject newPlayer) {
         mAppSectionsPagerAdapter.selectedPlayersChanged(newPlayer);
+    }
+
+    @Override
+    public void deletePlayer(PlayerObject playerObject) {
+        mAppSectionsPagerAdapter.deletePlayer(playerObject);
     }
 
     //Inflate Appbar

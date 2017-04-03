@@ -11,7 +11,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:id="@+id/ll_player_item">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -26,8 +26,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_player_item_mail"
             tools:text=""
-            style="@style/listItemSecondaryText"/>
-    </LinearLayout>
+            style="@style/listItemSecondaryText"
+            android:layout_below="@id/tv_player_item_name"/>
+        <TextView
+            android:id="@+id/tv_player_item_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="&#8942;"
+            android:textAppearance="?android:textAppearanceLarge" />
+
+    </RelativeLayout>
 
     <View
         android:layout_width="0dp"

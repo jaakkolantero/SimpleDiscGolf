@@ -20,7 +20,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by ufox on 11.3.2017.
@@ -32,17 +37,59 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
 
     private AddNewPlayerListener mAddNewPlayerListener;
 
+    private View mView;
+    private EditText mPlayerName;
+    private EditText mPlayerMail;
+    private PlayerObject mPlayerObject;
+    private static final String ARG_PLAYEROBJECT = "player-object";
+
     // Container Activity must implement this interface
     public interface AddNewPlayerListener {
         public void addNewPlayer(PlayerObject player);
+    }
+
+    public static PlayerAddDialogFragment newInstance(String jsonPlayer) {
+
+        Bundle args = new Bundle();
+        args.putString(ARG_PLAYEROBJECT,jsonPlayer);
+
+        PlayerAddDialogFragment fragment = new PlayerAddDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        String jsonPlayerObject;
+        if (getArguments() != null) {
+            jsonPlayerObject = getArguments().getString(ARG_PLAYEROBJECT);
+            mPlayerObject = new Gson().fromJson(jsonPlayerObject,PlayerObject.class);
+        }
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        mView = getActivity().getLayoutInflater().inflate(R.layout.dialog_player_add,null);
+        mPlayerName = (EditText) mView.findViewById(R.id.dialog_edit_name);
+        mPlayerMail = (EditText) mView.findViewById(R.id.dialog_edit_mail);
+        mPlayerName.setText(mPlayerObject.getPlayer());
+        mPlayerMail.setText(mPlayerObject.getMail());
+
         builder.setTitle(R.string.add_player_dialog_title);
-        builder.setView(R.layout.dialog_player_add);
+        builder.setView(mView);
+
+
         // Add action buttons
         builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             @Override
@@ -62,10 +109,10 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
     @Override
     public void onResume() {
         super.onResume();
-        final AlertDialog d = (AlertDialog)getDialog();
-        if(d != null)
+        final AlertDialog addPlayerDialog = (AlertDialog)getDialog();
+        if(addPlayerDialog != null)
         {
-            Button positiveButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+            Button positiveButton = (Button) addPlayerDialog.getButton(Dialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -89,11 +136,10 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
                         toast.show();
                     }
                     if (isValidName(nameEditText.getText()) && isValidMail(mailEditText.getText())) {
-                        mAddNewPlayerListener.addNewPlayer(
-                                new PlayerObject(
-                                        nameEditText.getText().toString().trim(),
-                                        mailEditText.getText().toString().trim()));
-                        d.dismiss();
+                        mPlayerObject.setPlayer(nameEditText.getText().toString().trim());
+                        mPlayerObject.setMail(mailEditText.getText().toString().trim());
+                        mAddNewPlayerListener.addNewPlayer(mPlayerObject);
+                        addPlayerDialog.dismiss();
                     } else {
                         Context context = getContext();
                         CharSequence text = getResources().getString(R.string.add_player_check_name);

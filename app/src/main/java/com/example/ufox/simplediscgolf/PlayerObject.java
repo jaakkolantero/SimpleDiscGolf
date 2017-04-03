@@ -1,5 +1,9 @@
 package com.example.ufox.simplediscgolf;
 
+import com.google.gson.annotations.Expose;
+
+import java.util.UUID;
+
 /**
  * Created by ufox on 2.3.2017.
  */
@@ -12,16 +16,20 @@ public class PlayerObject {
 
     private boolean mSelected;
 
+    private String mPlayerId;
+
     public PlayerObject() {
         mPlayer = "";
         mMail = "";
         mSelected = false;
+        mPlayerId = UUID.randomUUID().toString();
     }
 
     public PlayerObject(String player, String mail) {
         mPlayer = player;
         mMail = mail;
         mSelected = false;
+        mPlayerId = UUID.randomUUID().toString();
     }
 
     String getPlayer() {
@@ -36,6 +44,8 @@ public class PlayerObject {
         return mSelected;
     }
 
+    String getId() { return mPlayerId; }
+
     void setPlayer(String player) {
         mPlayer = player;
     }
@@ -46,6 +56,10 @@ public class PlayerObject {
 
     void setSelected(boolean selected) {
         mSelected = selected;
+    }
+
+    void setId (String playerId) {
+        mPlayerId = playerId;
     }
 
 }

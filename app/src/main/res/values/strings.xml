@@ -21,6 +21,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- PlayerFragment related -->
+    <string name="edit_player">Edit</string>
+    <string name="delete_player">Delete</string>
+
     <!-- Add player dialog related -->
     <string name="add_player_check_mail">Please check your email address</string>
     <string name="add_player_check_name">Please give a name</string>

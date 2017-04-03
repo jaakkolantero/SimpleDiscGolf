@@ -9,12 +9,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -31,9 +34,11 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
     protected PlayerAdapter mPlayerAdapter;
     protected ArrayList<PlayerObject> mPlayerObjectArrayList;
 
-    protected android.support.v4.app.DialogFragment addPlayerFragment;
+    protected android.support.v4.app.DialogFragment mPlayerAddDialogFragment;
 
     private static final String TAG = "PlayerFragment";
+
+    private PlayerViewHolder.SelectedPlayersListener mSelectedPlayersListener;
 
     public PlayerFragment() {
         // Required empty public constructor
@@ -56,6 +61,13 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         //Populate List with dummy data
         initDataSet();
+
+        if (getContext() instanceof PlayerViewHolder.SelectedPlayersListener) {
+            mSelectedPlayersListener = (PlayerViewHolder.SelectedPlayersListener) getContext();
+        } else {
+            throw new RuntimeException(getContext().toString()
+                    + " must implement SelectedPlayersListener");
+        }
     }
 
     @Override
@@ -72,7 +84,8 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mPlayerRecyclerView.setLayoutManager(layoutManager);
-        mPlayerRecyclerView.setHasFixedSize(true);
+        mPlayerRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+        mPlayerRecyclerView.setHasFixedSize(false);
 
         mPlayerAdapter = new PlayerAdapter(mPlayerObjectArrayList);
 
@@ -87,17 +100,18 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
         Log.d(TAG, "onCreateView: " + v.getId());
         switch (v.getId()) {
             case R.id.fab_player:
-                showAddPlayerDialog();
+                showAddPlayerDialog(new PlayerObject("",""));
                 break;
             default:
                 break;
         }
     }
 
-    void showAddPlayerDialog() {
+    void showAddPlayerDialog(PlayerObject playerObject) {
         FragmentManager fragmentManager = getFragmentManager();
-        addPlayerFragment = new PlayerAddDialogFragment();
-        addPlayerFragment.show(fragmentManager,"AddPlayerFragment");
+        String jsonPlayerObject = new Gson().toJson(playerObject,PlayerObject.class);
+        mPlayerAddDialogFragment = new PlayerAddDialogFragment().newInstance(jsonPlayerObject);
+        mPlayerAddDialogFragment.show(fragmentManager,"AddPlayerFragment");
     }
 
     void initDataSet() {
@@ -111,6 +125,43 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
 
     //Data from playeradddialogfragment through mainactivity
     void updatePlayer (PlayerObject player) {
-        mPlayerObjectArrayList.add(player);
+
+        boolean editPlayer = false;
+        int i = 0;
+        for (PlayerObject tempPlayer : mPlayerObjectArrayList) {
+
+            if (tempPlayer.getId().equals(player.getId()) ) {
+                editPlayer = true;
+                mPlayerObjectArrayList.set(i,player);
+                mPlayerAdapter.notifyItemChanged(i);
+            }
+
+            i++;
+        }
+
+        if (!editPlayer) {
+            mPlayerObjectArrayList.add(player);
+            mPlayerAdapter.notifyItemInserted(mPlayerObjectArrayList.size()-1);
+        }
+
+    }
+
+    void deletePlayer (PlayerObject playerObject) {
+        int i = 0;
+        Log.d(TAG, "deletePlayer: " + playerObject.getPlayer());
+        for (PlayerObject tempPlayer : mPlayerObjectArrayList) {
+
+            if (tempPlayer.getId().equals(playerObject.getId()) ) {
+                playerObject.setSelected(false);
+                mSelectedPlayersListener.selectedPlayersChanged(playerObject);
+
+                mPlayerObjectArrayList.remove(i);
+                mPlayerAdapter.notifyItemRemoved(i);
+                mPlayerAdapter.notifyItemRangeChanged(i,mPlayerObjectArrayList.size());
+                break;
+            }
+            i++;
+        }
+
     }
 }

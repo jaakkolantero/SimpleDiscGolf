@@ -84,4 +84,8 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
             mStartFragment.selectedPlayersChanged(newPlayer);
         }
     }
+
+    void deletePlayer(PlayerObject playerObject) {
+        mPlayerFragment.deletePlayer(playerObject);
+    }
 }

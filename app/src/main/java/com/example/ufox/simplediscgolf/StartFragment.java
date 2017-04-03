@@ -92,7 +92,7 @@ public class StartFragment extends Fragment {
             //if player is in selected players remove it (deselect)
             int i=0;
             for (PlayerObject player : mSelectedPlayers) {
-                if (player.getPlayer() == newPlayer.getPlayer()) {
+                if (player.getId().equals(newPlayer.getId())) {
                     mSelectedPlayers.remove(i);
                     break;
                 }
