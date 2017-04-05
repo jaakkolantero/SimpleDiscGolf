@@ -100,17 +100,17 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
         Log.d(TAG, "onCreateView: " + v.getId());
         switch (v.getId()) {
             case R.id.fab_player:
-                showAddPlayerDialog(new PlayerObject("",""));
+                showAddPlayerDialog(new PlayerObject("",""),getResources().getString(R.string.add_player_dialog_title),getResources().getString(R.string.add));
                 break;
             default:
                 break;
         }
     }
 
-    void showAddPlayerDialog(PlayerObject playerObject) {
+    void showAddPlayerDialog(PlayerObject playerObject, String title, String positiveButton) {
         FragmentManager fragmentManager = getFragmentManager();
         String jsonPlayerObject = new Gson().toJson(playerObject,PlayerObject.class);
-        mPlayerAddDialogFragment = new PlayerAddDialogFragment().newInstance(jsonPlayerObject);
+        mPlayerAddDialogFragment = new PlayerAddDialogFragment().newInstance(jsonPlayerObject,title,positiveButton);
         mPlayerAddDialogFragment.show(fragmentManager,"AddPlayerFragment");
     }
 
@@ -131,6 +131,8 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
         for (PlayerObject tempPlayer : mPlayerObjectArrayList) {
 
             if (tempPlayer.getId().equals(player.getId()) ) {
+                //Update name to startFragment
+                mSelectedPlayersListener.selectedPlayersChanged(player);
                 editPlayer = true;
                 mPlayerObjectArrayList.set(i,player);
                 mPlayerAdapter.notifyItemChanged(i);
@@ -153,6 +155,7 @@ public class PlayerFragment extends Fragment implements View.OnClickListener{
 
             if (tempPlayer.getId().equals(playerObject.getId()) ) {
                 playerObject.setSelected(false);
+                playerObject.setPlayer("");
                 mSelectedPlayersListener.selectedPlayersChanged(playerObject);
 
                 mPlayerObjectArrayList.remove(i);

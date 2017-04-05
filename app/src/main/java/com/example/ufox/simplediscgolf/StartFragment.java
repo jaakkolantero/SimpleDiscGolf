@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class StartFragment extends Fragment {
 
     private ArrayList<PlayerObject> mSelectedPlayers;
     private TextView mSelectedPlayersTextView;
+
+    private final String TAG = "StartFragment";
 
     public StartFragment() {
         // Required empty public constructor
@@ -88,25 +91,33 @@ public class StartFragment extends Fragment {
         //if empty : first item in list
         if (mSelectedPlayers.isEmpty()) {
             mSelectedPlayers.add(newPlayer);
+            updateSelectedPlayers();
         } else {
             //if player is in selected players remove it (deselect)
             int i=0;
             for (PlayerObject player : mSelectedPlayers) {
                 if (player.getId().equals(newPlayer.getId())) {
-                    mSelectedPlayers.remove(i);
-                    break;
+                    //If selected player edited
+                    if (newPlayer.getSelected()) {
+                        mSelectedPlayers.set(i,newPlayer);
+                    } else {
+                        mSelectedPlayers.remove(i);
+                    }
+                    updateSelectedPlayers();
+                    return;
                 }
-                //if not found before end add to selectedPlayers
-                if (i == mSelectedPlayers.size()-1) {
+                //if not found before end add to end of selectedPlayers
+                if (i == mSelectedPlayers.size()-1 && newPlayer.getSelected()) {
                     mSelectedPlayers.add(newPlayer);
-                    break;
+                    updateSelectedPlayers();
+                    return;
                 }
 
                 i++;
             }
         }
 
-        updateSelectedPlayers();
+
     }
 
     void updateSelectedPlayers() {

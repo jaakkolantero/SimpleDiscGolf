@@ -102,7 +102,7 @@ public class PlayerViewHolder extends RecyclerView.ViewHolder {
                             case R.id.edit_player:
                                 FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                                 String jsonPlayerObject = new Gson().toJson(playerObject);
-                                mPlayerAddDialogFragment = new PlayerAddDialogFragment().newInstance(jsonPlayerObject);
+                                mPlayerAddDialogFragment = new PlayerAddDialogFragment().newInstance(jsonPlayerObject,context.getResources().getString(R.string.edit_player_dialog_title),context.getResources().getString(R.string.edit_player));
                                 mPlayerAddDialogFragment.show(fragmentManager,"EditPlayerFragment");
                                 break;
                             case R.id.delete_player:

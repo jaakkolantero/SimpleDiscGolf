@@ -35,6 +35,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingLeft="8dp"
             android:text="&#8942;"
             android:textAppearance="?android:textAppearanceLarge" />
 

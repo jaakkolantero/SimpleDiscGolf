@@ -41,17 +41,23 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
     private EditText mPlayerName;
     private EditText mPlayerMail;
     private PlayerObject mPlayerObject;
+    private String mTitle;
+    private String mPositiveButton;
     private static final String ARG_PLAYEROBJECT = "player-object";
+    private static final String ARG_PLAYERTITLE = "player-title";
+    private static final String ARG_PLAYERPOSITIVEBUTTON = "player-positive-button";
 
     // Container Activity must implement this interface
     public interface AddNewPlayerListener {
         public void addNewPlayer(PlayerObject player);
     }
 
-    public static PlayerAddDialogFragment newInstance(String jsonPlayer) {
+    public static PlayerAddDialogFragment newInstance(String jsonPlayer,String title, String positiveButton) {
 
         Bundle args = new Bundle();
         args.putString(ARG_PLAYEROBJECT,jsonPlayer);
+        args.putString(ARG_PLAYERTITLE, title);
+        args.putString(ARG_PLAYERPOSITIVEBUTTON,positiveButton);
 
         PlayerAddDialogFragment fragment = new PlayerAddDialogFragment();
         fragment.setArguments(args);
@@ -64,6 +70,9 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
 
         String jsonPlayerObject;
         if (getArguments() != null) {
+            mTitle = getArguments().getString(ARG_PLAYERTITLE);
+            mPositiveButton = getArguments().getString(ARG_PLAYERPOSITIVEBUTTON);
+
             jsonPlayerObject = getArguments().getString(ARG_PLAYEROBJECT);
             mPlayerObject = new Gson().fromJson(jsonPlayerObject,PlayerObject.class);
         }
@@ -86,7 +95,7 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
         mPlayerName.setText(mPlayerObject.getPlayer());
         mPlayerMail.setText(mPlayerObject.getMail());
 
-        builder.setTitle(R.string.add_player_dialog_title);
+        builder.setTitle(mTitle);
         builder.setView(mView);
 
 
@@ -113,6 +122,7 @@ public class PlayerAddDialogFragment extends android.support.v4.app.DialogFragme
         if(addPlayerDialog != null)
         {
             Button positiveButton = (Button) addPlayerDialog.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setText(mPositiveButton);
             positiveButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
